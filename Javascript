@@ -1,0 +1,43 @@
+// Function implementing the number_pattern logic
+function number_pattern(n) {
+  if (typeof n !== 'number' || !Number.isInteger(n)) {
+    return "Argument must be an integer value.";
+  }
+  if (n < 1) {
+    return "Argument must be an integer greater than 0.";
+  }
+  const numbers = [];
+  for (let i = 1; i <= n; i++) {
+    numbers.push(i);
+  }
+  return numbers.join(' ');
+}
+
+// DOM elements
+const input = document.getElementById('numberInput');
+const button = document.getElementById('generateBtn');
+const resultPara = document.getElementById('result');
+const errorMsg = document.getElementById('errorMsg');
+
+// Event listener for button click
+button.addEventListener('click', () => {
+  // Clear previous messages
+  errorMsg.textContent = '';
+  resultPara.textContent = '';
+
+  const inputValue = input.value.trim();
+
+  // Parse input as number
+  const parsedNumber = Number(inputValue);
+
+  // Call the number_pattern function
+  const output = number_pattern(parsedNumber);
+
+  if (output.startsWith("Argument")) {
+    // Show error message
+    errorMsg.textContent = output;
+  } else {
+    // Show pattern result
+    resultPara.textContent = output;
+  }
+});
